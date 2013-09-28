@@ -91,7 +91,7 @@ shinyUI(pageWithSidebar(
 									tabPanel("About",
 													 h4("Contact"),
 													 verbatimTextOutput("author"),
-													 a(href="http://www.ifrec.osaka-u.ac.jp/en/laboratory/bioinformaticsandgenomics/index.php", target="_blank", "Bioinformatics and Genomics group at IFReC"),
+													 a(href="http://www.ifrec.osaka-u.ac.jp/en/laboratory/qiru/index.php", target="_blank", "Quantitative Immunology Research Unit (IFReC)"),
 													 h4("Citation"),
 													 p("To cite rTRMui please use:", br(), verbatimTextOutput("trmui_citation")),
 													 p("To cite rTRM please use:", br(), verbatimTextOutput("trm_citation")),
