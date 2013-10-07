@@ -24,7 +24,14 @@ library(rTRMui)
 runTRM()
 @
 
-This will open a web browser and show the rTRMui home page. Instructions on how to use rTRMui are available in the \emph{Help} tab from the rTRMui server. Example datasets can be downloaded from the home page and used with the \emph{Tutorial}.
+This will open a web browser and show the rTRMui home page (Figure \ref{fig:fig1}). Instructions on how to use rTRMui are available in the \emph{Help} tab from the rTRMui server. Example datasets can be downloaded from the home page and used with the \emph{Tutorial}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1]{figure1.pdf}
+\caption{rTRMui home page showing the TRM indentified using the sample datasets from the tutorial.}
+\label{fig:fig1}
+\end{figure}
 
 \section{System information}
 

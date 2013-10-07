@@ -1,0 +1,14 @@
+Package: rTRMui
+=============
+
+Version: 1.0
+
+o First Bioconductor release.
+
+o Provides a shiny interface to rTRM.
+
+o All options available in rTRM can be accesses from rTRMui.
+
+o Several utilities to control network appearance (node, edge and label size, etc.)
+
+o Download results in PDF and text format.
