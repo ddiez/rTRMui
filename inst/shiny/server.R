@@ -9,16 +9,27 @@ data(biogrid_hs)
 .getGeneReport = 
 function (x, organism, sort.by = "symbol") 
 {
-	smap = rTRM:::.getMapFromOrg(organism, "SYMBOL")
-	S = unlist(AnnotationDbi::mget(x, smap, ifnotfound = NA))
-	S[is.na(S)] = ""
 	
-	dmap = rTRM:::.getMapFromOrg(organism, "GENENAME")
-	D = unlist(AnnotationDbi::mget(x, dmap, ifnotfound = NA))
-	D[is.na(D)] = ""
+	switch(organism,
+				 human={
+				 	dd=select(org.Hs.eg.db, keys=x, columns=c("SYMBOL", "GENENAME"))
+				 },
+				 mouse={
+				 	dd=select(org.Mm.eg.db, keys=x, columns=c("SYMBOL", "GENENAME"))
+				 }
+	)
+	
+	#smap = rTRM:::.getMapFromOrg(organism, "SYMBOL")
+	#S = unlist(AnnotationDbi::mget(x, smap, ifnotfound = NA))
+	#S[is.na(S)] = ""
+	
+	#dmap = rTRM:::.getMapFromOrg(organism, "GENENAME")
+	#D = unlist(AnnotationDbi::mget(x, dmap, ifnotfound = NA))
+	#D[is.na(D)] = ""
 	
 	#family = sapply(getTFclassFromEntrezgene(x), function(z) if (length(z) > 0) paste(z, collapse = " | ") else "")
-	d = data.frame(entrezgene = x, symbol = S, description = D)#, family = family, check.names = FALSE)
+	#d = data.frame(entrezgene = x, symbol = S, description = D)#, family = family, check.names = FALSE)
+	d = data.frame(entrezgene = x, symbol = dd$SYMBOL, description = dd$GENENAME)#, family = family, check.names = FALSE)
 	d[order(d[, sort.by]), ]
 }
 
