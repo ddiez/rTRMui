@@ -5,7 +5,7 @@
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
-\title{rTRMui: an shiny UI for the identification of transcription regulatory modules}
+\title{rTRMui: a shiny user interface for the identification of transcriptional regulatory modules}
 
 \author{Diego Diez}
 

@@ -1,7 +1,7 @@
 Package: rTRMui
 Type: Package
 Title: A shiny user interface for rTRM
-Version: 0.99.4
+Version: 0.99.5
 Date: 2013-10-08
 Author: Diego Diez
 Depends: shiny (>= 0.5), rTRM, MotifDb, org.Hs.eg.db, org.Mm.eg.db
