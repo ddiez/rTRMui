@@ -76,6 +76,7 @@ shinyUI(pageWithSidebar(
 									),
 									tabPanel("Transcription factors",
 													 h4(textOutput("organism")),
+													 em("This list includes all TFs for which there is a PWM in the rTRM database. The target organism matches the one selected in the left panel."),br(),br(),
 													 textInput("filter", label="Filter by symbol", value=NULL),
 													 tableOutput("tfs")
 									),

@@ -29,13 +29,13 @@ The species where the ChIP-seq or alternative experimental technique has been pe
 
 The transcription factor for which a ChIP-seq experiment is available and around which we wish to identify TRMs. Search in the "Transcription factors" tab for the symbol of the transcription factor you want to use.
 
-<h4>Query transcription factor</h4>
+<h4>Query transcription factors</h4>
 
 The list of transcription factors that we want to test whether they belong to the TRM around the target transcription factor. This list may come from any source of evidence. A typical case is the enrichment of transcription factor binding motifs in the binding regions of the target transcription factor. A file with each identifier followed by a new line must be specified. Supporting identifiers include PWM ids from the rTRM database or from the MotifDb package, as well as Entrezgene identifiers.
 
 <h4>Expressed genes</h4>
 
-List of expressed genes in the tissue of interestes. Typically this means the same tissue or cell type for which the ChIP-seq experiment for the target transcription factor was performed. The list must currently be specified as Entrezgene identifiers.
+List of expressed genes in the tissue of interestes. Ideally the tissue should be the same as the one where the original ChIP-seq experiment for the target TF was performed. The list of expressed genes must be specified using Entrezgene identifiers.
 
 </p>
 
@@ -47,26 +47,26 @@ This parameter controls whether the TRM is computed applying the maximum distanc
 
 <h4>Strict TRM</h4>
 
-Whether a connected PPI module is enforced. If TRUE then only the connected component containing the target transcription factor is returned. If FALSE then it will return all the components (TRUE by default).
+Sometimes rTRM predictions result in TRMs containing disconnected components (i.e. two or more independent subnetworks). It is possible to enforce that only one subnetwork containing the target TF is returned. This can be controlled with the 'strict' parameter, which when is TRUE (default) enforces a single component.
 
 <h4>Bridge distance</h4>
 
-Maximum distance between the query and the target transcription factors. If "Extended TRM" is FALSE then it is also the maximum distance between the query transcription factors.
+rTRM searchs for query TFs separated a maximum distance from the target TF. The maximum distance is controlled with the bridge distance parameter. By default bridge distance is 1, which means one protein is allowed to separate the query TF from the target TF. If the minimun distance between the query and TF is larger than the bridge distance then the query TF is discarded. When extended is TRUE, then the query TF is keep if the distance to the target TF or to any other query TF is less or equal to the bridge distance.
 
 <h4>Filter Ubiquitin/Sumo from PPI</h4>
 
-Whether to remove from the PPI network the nodes corresponding to Ubiquitin and Sumo peptides (TRUE by default).
+Ubiquitin and Sumo peptides are included in the PPI networks, and represent network outliers that can bias the prediction of TRMs. This parameter gives the user the choice to remove Ubiquitin and Sumo proteins from the PPI network prior to TRM prediction (TRUE by default).
 
 </p>
 <h3 id="plot_parameters">Plot parameters</h3>
 
 <p>
 
-This section enable (basic) adjuting some of the plotting parameters that control the appearance of the TRM.
+Various graphic parameters may be adjusted to manipulate the appearance of the resulting TRM, which can then be saved as a publication-quality figure.
 
 <h4>Margin</h4>
 
-Controls the margin around the TRM to avoid nodes to get cropped when the node size is large.
+Controls the margin around the TRM to avoid nodes getting cropped whenever the node size is too large.
 
 <h4>Network layout</h4>
 
@@ -74,7 +74,7 @@ Selects the network layout for the TRM. Five layouts are available:
 
 <ul>
 	<il><strong>concentric:</strong> (default) a concentric layout with target TFs in the center, query TFs in the outer circle and bridge proteins in the middle circle.</il><br>
-	<il><strong>arc:</strong> layout mimiquing the rTRM logo, i.e. a linear layout with the target TFs in the middle and the query TFs at each side, with the bridge proteins in between of both in the right side.</il><br>
+	<il><strong>arc:</strong> layout mimicking the rTRM logo, i.e. a linear layout with the target TFs in the middle and the query TFs at each side, with the bridge proteins in between of both in the right side.</il><br>
 	<il><strong>circle:</strong> circle layout from the igraph package.</il><br>
 	<il><strong>kamada.kawai:</strong> from the igraph package.</il><br>
 	<il><strong>fruchterman.reingold:</strong> from the igraph package.</il><br>
@@ -101,7 +101,7 @@ Controls label size.
 <h3 id="download">Download</h3>
 
 <p>
-	Three buttons with the labels "Plot", "Legend" and "Table" appear when a TRM has been successfully identified. Clicking in any of these buttons will download a PDF version of the TRM, a PDF version of the legend and a tab delimited text file with the information about TRMs found in the "Table" tab.
+	Three buttons with the labels "Plot", "Legend" and "Table" appear when a TRM has been successfully identified. Clicking on any of these buttons will download a PDF version of the TRM, a PDF version of the legend and a tab delimited text file with the information about TRMs found in the "Table" tab.
 </p>
 
 </div>

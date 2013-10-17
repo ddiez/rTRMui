@@ -158,7 +158,7 @@ shinyServer(function(input, output, clientData) {
   #####################
   
   output$organism = reactive({
-  	paste("List of", org(), "transcription factors in rTRM")
+  	paste("List of", org(), "transcription factors")
   })
   
   
