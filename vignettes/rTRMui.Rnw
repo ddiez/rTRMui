@@ -1,6 +1,7 @@
 %\VignetteIndexEntry{rTRMui}
 %\VignetteKeywords{rTRMui, rTRM}
 %\VignettePackage{rTRMui}
+%\VignetteDepends{rTRMui}
 \documentclass{article}
 
 \begin{document}
