@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{rTRMui}
+%\VignetteIndexEntry{Introduction to rTRMui}
 %\VignetteKeywords{rTRMui, rTRM}
 %\VignettePackage{rTRMui}
 %\VignetteDepends{rTRMui}
