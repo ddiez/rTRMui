@@ -1,1 +1,3 @@
+import(shiny, rTRM, MotifDb, org.Hs.eg.db, org.Mm.eg.db)
+
 exportPattern("^[[:alpha:]]+")

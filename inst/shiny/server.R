@@ -10,23 +10,9 @@ data(biogrid_hs)
 function (x, organism, sort.by = "symbol") 
 {
 	
-	switch(organism,
-				 human={
-				 	dd=select(org.Hs.eg.db, keys=x, columns=c("SYMBOL", "GENENAME"))
-				 },
-				 mouse={
-				 	dd=select(org.Mm.eg.db, keys=x, columns=c("SYMBOL", "GENENAME"))
-				 }
-	)
-	
-	#smap = rTRM:::.getMapFromOrg(organism, "SYMBOL")
-	#S = unlist(AnnotationDbi::mget(x, smap, ifnotfound = NA))
-	#S[is.na(S)] = ""
-	
-	#dmap = rTRM:::.getMapFromOrg(organism, "GENENAME")
-	#D = unlist(AnnotationDbi::mget(x, dmap, ifnotfound = NA))
-	#D[is.na(D)] = ""
-	
+	map = rTRM:::.getMapFromOrg(organism)
+	dd = select(map, keys=x, columns=c("SYMBOL", "GENENAME"))
+
 	#family = sapply(getTFclassFromEntrezgene(x), function(z) if (length(z) > 0) paste(z, collapse = " | ") else "")
 	#d = data.frame(entrezgene = x, symbol = S, description = D)#, family = family, check.names = FALSE)
 	d = data.frame(entrezgene = x, symbol = dd$SYMBOL, description = dd$GENENAME)#, family = family, check.names = FALSE)
@@ -49,15 +35,15 @@ tf_mm = .getTFreport("mouse")
   )}
 
 .getFilterFromOrg = function(x) {
+	map = rTRM:::.getMapFromOrg(x)
 	switch(x,
 		"human" = {
 		 	f = c("UBC", "SUMO1", "SUMO2", "SUMO3", "SUMO4")
-		 	unlist(mget(f, revmap(org.Hs.egSYMBOL)))
 		},
 		"mouse" = {
 		 	f = c("Ubc", "Sumo1", "Sumo2", "Sumo3")
-		 	unlist(mget(f, revmap(org.Mm.egSYMBOL)))
 		})
+	select(map,keys=f,columns="ENTREZID",keytype="SYMBOL")$ENTREZID
 }
 
 .getLayout = function(x) {
@@ -105,7 +91,7 @@ shinyServer(function(input, output, clientData) {
   })
   
   map = reactive({
-    revmap(rTRM:::.getMapFromOrg(input$organism))
+    rTRM:::.getMapFromOrg(input$organism)
   })
   
   org = reactive({
@@ -195,8 +181,13 @@ shinyServer(function(input, output, clientData) {
   })
       
   target = reactive({
-    if(!is.null(input$target))
-      target = unlist(mget(input$target, map(), ifnotfound = NA))
+    if(!is.null(input$target)) {
+    	res=try(select(map(),keys=input$target,columns="ENTREZID",keytype="SYMBOL"),silent=TRUE)
+    	if(class(res)!="try-error")
+    		target=unique(na.omit(res$ENTREZID))
+    	else return(NULL)
+    } else return(NULL)
+
     if(length(target)>1 || is.na(target))
       NULL
     else target
@@ -205,12 +196,6 @@ shinyServer(function(input, output, clientData) {
   layout = reactive({
     if(!is.null(trm())) {
       layfun = .getLayout(input$layout)
-#       if(input$layout == "concentric") {
-#       	cl = getConcentricList(trm(), t=target(), e=query(),order.by=ifelse(input$sort,"label","name"))
-#       	layfun(trm(),concentric=cl, order.by=ifelse(input$sort,"label","name"))
-#       } else {
-#       	layfun(trm())
-#       }
       switch(input$layout,
       			 "concentric" = {
       			 		cl = getConcentricList(trm(), t=target(), e=query(),order.by=ifelse(input$sort,"label","name"))
@@ -321,23 +306,6 @@ shinyServer(function(input, output, clientData) {
   	else
   		img(src = "pic/check_no.png", height = "25px", width="25px")
   })
-  
-#   output$trmplotControl = renderUI({
-#     if(!is.null(trm()))
-#       downloadButton("trmplot", "Plot")
-#   })
-#   output$trmlegendControl = renderUI({
-#     if(!is.null(trm()))
-#       downloadButton("trmlegend", "Legend")
-#   })
-#   output$trmtableControl = renderUI({
-#     if(!is.null(trm())) {
-#       list(
-#         textOutput("Table"),
-#         downloadButton("trmtable", "Download")
-#       )
-#     }
-#  })
 })
   
   
