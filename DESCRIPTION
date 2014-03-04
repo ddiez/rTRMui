@@ -1,13 +1,14 @@
 Package: rTRMui
 Type: Package
 Title: A shiny user interface for rTRM
-Version: 1.1.5
+Version: 1.1.6
 Date: 2014-02-14
 Author: Diego Diez
 Imports: shiny (>= 0.5), rTRM, MotifDb, org.Hs.eg.db, org.Mm.eg.db
 Maintainer: Diego Diez <diego10ruiz@gmail.com>
-Description: This package provides a web interface to compute transcriptional regulatory modules with rTRM.
+Description: This package provides a web interface to compute
+        transcriptional regulatory modules with rTRM.
 License: GPL-3
 LazyLoad: yes
 ByteCompile: yes
-biocViews: Transcription, NetworkAnalysis, GeneRegulation, GraphsAndNetworks, GUI
+biocViews: Transcription, Network, GeneRegulation, GraphAndNetwork, GUI
