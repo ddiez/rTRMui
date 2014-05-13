@@ -26,6 +26,15 @@ function (x, organism, sort.by = "symbol")
 }
 tf_hs = .getTFreport("human")
 tf_mm = .getTFreport("mouse")
+
+tf_hs_eg=tf_hs$entrezgene
+tf_mm_eg=tf_mm$entrezgene
+
+tf_hs_name=apply(tf_hs,1,function(x) paste(x[2]," (",x[1],")",sep=""))
+tf_mm_name=apply(tf_mm,1,function(x) paste(x[2]," (",x[1],")",sep=""))
+
+names(tf_hs_eg)=tf_hs_name
+names(tf_mm_eg)=tf_mm_name
  
 # 
 .getPPIfromOrg = function(x) {
@@ -86,10 +95,19 @@ shinyServer(function(input, output, clientData) {
   	)
   })
   
-  output$foo = reactive({
-  	input$tabs
+  tflist2 = reactive({
+  	switch(input$organism,
+  				 "human" = tf_hs_eg,
+  				 "mouse" = tf_mm_eg
+  	)
   })
   
+  output$target_select=renderUI({
+  	#print(head(tflist()))
+  	#print(head(tflist2()))
+  	selectizeInput("target","Target transcription factor",choices=tflist2(),selected=NA)
+  })
+    
   map = reactive({
     rTRM:::.getMapFromOrg(input$organism)
   })
@@ -179,19 +197,10 @@ shinyServer(function(input, output, clientData) {
   		induced.subgraph(p, V(p)[ name %in% g ])	
   	}
   })
-      
-  target = reactive({
-    if(!is.null(input$target)) {
-    	res=try(select(map(),keys=input$target,columns="ENTREZID",keytype="SYMBOL"),silent=TRUE)
-    	if(class(res)!="try-error")
-    		target=unique(na.omit(res$ENTREZID))
-    	else return(NULL)
-    } else return(NULL)
 
-    if(length(target)>1 || is.na(target))
-      NULL
-    else target
-  })
+	target = reactive({
+			input$target
+	})
   
   layout = reactive({
     if(!is.null(trm())) {

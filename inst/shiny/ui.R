@@ -17,7 +17,7 @@ shinyUI(
 							 # Data input.
 							 withTags(table(style="width: 100%",td(h4("Data input")), td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"),title="Input the target organism and transcription factor, the list of query transcription factors and the list of expressed genes."))),
 							 selectInput("organism", "Target organism", choices = list("human", "mouse"), selected = NULL),
-							 withTags(table(style="width: 100%", td(textInput("target", "Target transcription factor", value = NULL)), td(style="vertical-align:bottom; padding-bottom:13px; padding-left:5px", uiOutput("targetCheck")))),
+							 uiOutput("target_select"),
 							 selectInput("query", "Query transcription factors", choices = list("Motif (rTRM) identifier" = "motif", "Motif (MotifDb) identifier" = "motif_motifdb", "Gene (entrezgene) identifier" = "gene")),
 							 fileInput("motif", "", multiple = FALSE,
 							 					accept = NULL),
