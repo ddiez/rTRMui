@@ -273,12 +273,12 @@ shinyServer(function(input, output, clientData) {
       plotTRMlegend(trm(), cex = 1.5)
   })
   
-  output$genes = renderTable({
+  output$genes = renderDataTable({
     if(!is.null(trm()))
       writeTRMreport(trm(), organism = input$organism, target = target(), query = query())
-  }, include.rownames = FALSE)
+  },options=list(bFilter=FALSE))
   
-  output$tfs = renderTable({
+  output$tfs = renderDataTable({
   	tfs = switch(input$organism,
   				 "human" = tf_hs,
   				 "mouse" = tf_mm
@@ -287,7 +287,7 @@ shinyServer(function(input, output, clientData) {
   		tfs
   	else
   		tfs[grepl(input$filter, tfs$symbol,ignore.case=TRUE), ]
-  }, include.rownames = FALSE)
+  },options=list(bFilter=FALSE))
   
   output$trmtable = downloadHandler(filename = "trmtable.txt", content = function(con) { writeTRMreport(trm(), file = con, organism = input$organism, target = target(), query = query()) })
   

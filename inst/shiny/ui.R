@@ -8,7 +8,7 @@ shinyUI(
 	titlePanel(
 		h1("rTRMui: Identification of Transcriptional Regulatory Modules", style="height:80px;background-image:url(pic/logo.png);background-size:175px;background-repeat:no-repeat; padding-left:175px")),
 	sidebarLayout(
-	sidebarPanel(style="width:250px;",
+	sidebarPanel(#style="width:250px;",
 							 # Example session.
 							 withTags(table(style="width: 100%",td(h4("Example session")),td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"),title="Download the following datasets, set 'mouse' as the target organism, set Sox2 as the target transcription factor, load the corresponding enriched motifs and expressed genes, and you are done!"))),
 							 em("Sox2 dataset on ESCs:"),
@@ -60,13 +60,13 @@ shinyUI(
 												 plotOutput("legend")
 								),
 								tabPanel("Table",
-												 tableOutput("genes")
+												 dataTableOutput("genes")
 								),
 								tabPanel("Transcription factors",
 												 h4(textOutput("organism")),
 												 em("This list includes all TFs for which there is a PWM in the rTRM database. The target organism matches the one selected in the left panel."),br(),br(),
 												 textInput("filter", label="Filter by symbol", value=NULL),
-												 tableOutput("tfs")
+												 dataTableOutput("tfs")
 								),
 								tabPanel("Tutorial",
 												 h4("Identification of Sox2 TRM in ESCs:"),
