@@ -289,7 +289,7 @@ shinyServer(function(input, output, clientData) {
         dev.off()
       }
   )
-  
+
   output$trmplot = downloadHandler(filename = "trmplot.pdf",
     content = function(con) {
       if(!is.null(trm())) {
@@ -302,9 +302,9 @@ shinyServer(function(input, output, clientData) {
   
   output$targetCheck = renderUI({
   	if(!is.null(target()))
-  		img(src = "pic/check_ok.png", height = "25px", width="25px")
+  		div(icon("check"),style="color: green;")
   	else
-  		img(src = "pic/check_no.png", height = "25px", width="25px")
+  		div(icon("exclamation"),style="color: darkred;")
   })
 })
   
