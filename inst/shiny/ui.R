@@ -50,7 +50,7 @@ shinyUI(
 							 	downloadButton("trmtable", "Table")
 							 )
 	),
-	mainPanel(style="position: fixed; left:300px;width:600px;",
+	mainPanel(style="left:300px;width:600px;",
 		tabsetPanel(id = "tabs",
 								tabPanel("Plot",
 												 plotOutput("trm"),
@@ -66,8 +66,9 @@ shinyUI(
 												 dataTableOutput("tfs")
 								),
 								tabPanel("Tutorial",
-												 h4("Identification of Sox2 TRM in ESCs:"),
-												 img(src="pic/tutorial.png",title="Tutorial")
+												 #h4("Identification of Sox2 TRM in ESCs:"),
+												 #img(src="pic/tutorial.png",title="Tutorial")
+												 includeHTML(system.file(package="rTRMui","shiny/www/doc/tutorial.html"))
 								),
 								tabPanel("Help",
 												 includeHTML(system.file(package="rTRMui","shiny/www/doc/index.html"))
