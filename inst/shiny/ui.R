@@ -4,11 +4,10 @@ library(rTRM)
 shinyUI(
 	#pageWithSidebar(
 	fluidPage(
-	#headerPanel(
 	titlePanel(
 		div("rTRMui: Identification of Transcriptional Regulatory Modules", style="height:80px;background-image:url(pic/logo.png);background-size:175px;background-repeat:no-repeat; padding-left:175px"),"rTRMui"),
 	sidebarLayout(
-	sidebarPanel(#style="width:250px;",
+	sidebarPanel(style="width:250px;",
 							 # Example session.
 							 withTags(table(style="width: 100%",td(h4("Example session")),td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"),title="Download the following datasets, set 'mouse' as the target organism, set Sox2 as the target transcription factor, load the corresponding enriched motifs and expressed genes, and you are done!"))),
 							 em("Sox2 dataset on ESCs:"),
@@ -19,10 +18,8 @@ shinyUI(
 							 selectInput("organism", "Target organism", choices = list("human", "mouse"), selected = NULL),
 							 uiOutput("target_select"),
 							 selectInput("query", "Query transcription factors", choices = list("Motif (rTRM) identifier" = "motif", "Motif (MotifDb) identifier" = "motif_motifdb", "Gene (entrezgene) identifier" = "gene")),
-							 fileInput("motif", "", multiple = FALSE,
-							 					accept = NULL),
-							 fileInput("gene", "Expressed genes", multiple = FALSE,
-							 					accept = NULL),
+							 fileInput("motif", "", multiple = FALSE, accept = NULL),
+							 fileInput("gene", "Expressed genes", multiple = FALSE, accept = NULL),
 							 
 							 # Network parameters.
 							 withTags(table(style="width: 100%", td(h4("Network parameters")), td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"), title="Adjust the parameters controlling how the TRM is identified."))),
@@ -39,9 +36,9 @@ shinyUI(
 							 conditionalPanel(condition="input.layout=='concentric'",
 							 								 checkboxInput("sort", label="Sort nodes by name",value=TRUE)
 							 ),
-							 sliderInput("vsize", label="Node size", min=1, max=30, value = 20),
-							 sliderInput("esize", label="Line size", min=.5, max=10, value = 5),
-							 sliderInput("lsize", label="Label size", min=0.1, max=5, value = 1.5),
+							 sliderInput("vsize", label="Node size", min=1, max=30, value = 20, step=1),
+							 sliderInput("esize", label="Line size", min=.5, max=10, value = 5,step=0.5),
+							 sliderInput("lsize", label="Label size", min=0, max=5, value = 1.5,step=0.5),
 							 br(),
 							 
 							 # Download.
@@ -53,7 +50,7 @@ shinyUI(
 							 	downloadButton("trmtable", "Table")
 							 )
 	),
-	mainPanel(
+	mainPanel(style="position: fixed; left:300px;width:600px;",
 		tabsetPanel(id = "tabs",
 								tabPanel("Plot",
 												 plotOutput("trm"),

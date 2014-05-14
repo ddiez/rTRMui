@@ -265,7 +265,7 @@ shinyServer(function(input, output, clientData) {
   
   output$trm = renderPlot({
     if(!is.null(trm()))
-      plotTRM(trm(), layout = layout(), vertex.cex = input$vsize, vertex.lwd = input$esize, edge.lwd = input$esize, label.cex = input$lsize, mar = input$margin)
+      plotTRM(trm(), layout = layout(), vertex.cex = input$vsize, vertex.lwd = input$esize, edge.lwd = input$esize, label=as.logical(input$lsize),label.cex = input$lsize, mar = input$margin)
   })
   
   output$legend = renderPlot({
