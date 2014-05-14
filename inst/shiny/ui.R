@@ -6,7 +6,7 @@ shinyUI(
 	fluidPage(
 	#headerPanel(
 	titlePanel(
-		h1("rTRMui: Identification of Transcriptional Regulatory Modules", style="height:80px;background-image:url(pic/logo.png);background-size:175px;background-repeat:no-repeat; padding-left:175px")),
+		div("rTRMui: Identification of Transcriptional Regulatory Modules", style="height:80px;background-image:url(pic/logo.png);background-size:175px;background-repeat:no-repeat; padding-left:175px"),"rTRMui"),
 	sidebarLayout(
 	sidebarPanel(#style="width:250px;",
 							 # Example session.
