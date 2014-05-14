@@ -2,7 +2,6 @@ library(shiny)
 library(rTRM)
 
 shinyUI(
-	#pageWithSidebar(
 	fluidPage(
 	titlePanel(
 		div("rTRMui: Identification of Transcriptional Regulatory Modules", style="height:80px;background-image:url(pic/logo.png);background-size:175px;background-repeat:no-repeat; padding-left:175px"),"rTRMui"),
@@ -66,8 +65,6 @@ shinyUI(
 												 dataTableOutput("tfs")
 								),
 								tabPanel("Tutorial",
-												 #h4("Identification of Sox2 TRM in ESCs:"),
-												 #img(src="pic/tutorial.png",title="Tutorial")
 												 includeHTML(system.file(package="rTRMui","shiny/www/doc/tutorial.html"))
 								),
 								tabPanel("Help",
