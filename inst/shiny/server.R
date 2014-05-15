@@ -193,6 +193,19 @@ shinyServer(function(input, output, session) {
   		induced.subgraph(p, V(p)[ name %in% g ])	
   	}
   })
+  
+  observe({
+  	input$reset
+  	isolate({
+  		updateSelectInput(session,"organism",selected = "human")
+  		updateSelectInput(session,"target",selected = "")
+  		updateSelectInput(session,"query",selected="motif")
+  		updateSelectInput(session,"extended",selected="FALSE")
+  		updateSelectInput(session,"strict",selected="TRUE")
+  		updateSelectInput(session,"distance",selected=1)
+  		updateCheckboxInput(session,"filter_ppi",value = "TRUE")
+  	})
+  })
 
 	target = reactive({
 			input$target
@@ -216,7 +229,8 @@ shinyServer(function(input, output, session) {
   })
   
   trm = reactive({
-    if(!is.null(target()) && !is.null(query()) && !is.null(gene()) && !is.null(ppi())) {
+  	input$go
+    isolate({if(!is.null(target()) && !is.null(query()) && !is.null(gene()) && !is.null(ppi())) {
       t = target()
       g = gene()
       g = unique(c(g, t)) # make sure targets are present!
@@ -228,6 +242,7 @@ shinyServer(function(input, output, session) {
     }
     else
       NULL
+    })
   })
   
 

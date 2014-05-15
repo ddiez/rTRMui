@@ -3,6 +3,7 @@ library(rTRM)
 
 shinyUI(
 	fluidPage(
+		#includeCSS("www/custom.css"),
 	titlePanel(
 		div("rTRMui: Identification of Transcriptional Regulatory Modules", style="height:80px;background-image:url(pic/logo.png);background-size:175px;background-repeat:no-repeat; padding-left:175px"),"rTRMui"),
 	sidebarLayout(
@@ -25,9 +26,9 @@ shinyUI(
 							 selectInput("extended", "Extended TRM", choices = c(TRUE, FALSE), selected = FALSE),
 							 selectInput("strict", "Strict TRM", choices = c(TRUE, FALSE), selected = TRUE),
 							 selectInput("distance", "Bridge distance", choices = 0:10, selected = 1),
-							 checkboxInput("filter_ppi", label="Filter Ubiquitin/Sumo from PPI", value=TRUE),
+							 checkboxInput("filter_ppi", label="Filter Ubiquitin/Sumo from PPI", value=TRUE),br(),
+							 withTags(table(style="width:100%",td(style="text-align:center;",actionButton("reset","Clear options",icon("stop"))),td(style="text-align:center;",actionButton("go","Search TRM",icon=icon("play"))))),
 							 br(),
-							 
 							 # Plot parameters.
 							 withTags(table(style="width:100%;",td(h4("Plot parameters")), td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"),title="Adjust the parameters controlling how the TRM is plotted"))),
 							 sliderInput("margin", label="Margin", min=0, max=5, value = 2),
@@ -41,12 +42,14 @@ shinyUI(
 							 br(),
 							 
 							 # Download.
-							 withTags(table(style="width:100%;",td(h4("Download")), td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"),title="Download options are available once the TRM is successfully identified."))),
+							 withTags(table(style="width:100%;",td(h4("Download")), td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"),title="Download options are available once a TRM is successfully identified."))),
 							 conditionalPanel(
 							 	condition = "output.trmdone == true",
-							 	downloadButton("trmplot", "TRM"),
-							 	downloadButton("trmlegend", "Legend"),
-							 	downloadButton("trmtable", "Table")
+							 	withTags(table(style="width: 100%",
+							 		tr(td("TRM plot"),td(style="text-align: right;padding-right:3px;", downloadLink("trmplot",icon("download")))),
+							 		tr(td("TRM legend"),td(style="text-align: right;padding-right:3px;", downloadLink("trmlegend",icon("download")))),
+							 		tr(td("TRM TFs"),td(style="text-align: right;padding-right:3px;", downloadLink("trmtable",icon("download"))))
+							 	))
 							 )
 	),
 	mainPanel(style="left:300px;width:600px;",
