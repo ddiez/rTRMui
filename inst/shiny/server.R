@@ -65,7 +65,7 @@ names(tf_mm_eg)=tf_mm_name
   )
 }
 
-shinyServer(function(input, output, clientData) {
+shinyServer(function(input, output, session) {
 	
   motif = reactive({
     if(!is.null(input$motif$name))
@@ -102,12 +102,8 @@ shinyServer(function(input, output, clientData) {
   	)
   })
   
-  output$target_select=renderUI({
-  	#print(head(tflist()))
-  	#print(head(tflist2()))
-  	selectizeInput("target","Target transcription factor",choices=tflist2(),selected=NA)
-  })
-    
+  observe({updateSelectInput(session,"target",choices=tflist2())})
+      
   map = reactive({
     rTRM:::.getMapFromOrg(input$organism)
   })
@@ -307,14 +303,7 @@ shinyServer(function(input, output, clientData) {
         dev.off()
       } else NULL
     }
-  )
-  
-  output$targetCheck = renderUI({
-  	if(!is.null(target()))
-  		div(icon("check"),style="color: green;")
-  	else
-  		div(icon("exclamation"),style="color: darkred;")
-  })
+  )  
 })
   
   
