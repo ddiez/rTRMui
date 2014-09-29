@@ -15,7 +15,7 @@ function (x, organism, sort.by = "symbol")
 
 	#family = sapply(getTFclassFromEntrezgene(x), function(z) if (length(z) > 0) paste(z, collapse = " | ") else "")
 	#d = data.frame(entrezgene = x, symbol = S, description = D)#, family = family, check.names = FALSE)
-	d = data.frame(entrezgene = x, symbol = dd$SYMBOL, description = dd$GENENAME)#, family = family, check.names = FALSE)
+	d = data.frame(entrezgene = x, symbol = dd$SYMBOL, description = dd$GENENAME,stringsAsFactors = FALSE)#, family = family, check.names = FALSE)
 	d[order(d[, sort.by]), ]
 }
 
