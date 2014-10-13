@@ -1,0 +1,109 @@
+<html>
+
+<head>
+<title>rTRMui: documentation</title>
+</head>
+
+<body>
+
+<div style="text-align:justify;margin-bottom:100px">
+
+<!--<h3 style="background-image:url(../pic/logo.png);background-size:175px;background-repeat:no-repeat;padding-left:175px">rTRMui: a graphical user interface for the identification of transcriptional regulatory modules</h3>-->
+
+<!--<iframe src="http://localhost:8100" style="border: 1px solid #CCC; width: 440px; height: 500px"></iframe>-->
+
+<h3 id="intro">Introduction</h3>
+
+<div style="float:left;padding:5px;margin-right:10px;border-style:solid;border-width:1px;border-color:#AAAAAA"><img src="pic/logo.png" style="width:250px"><br>The rTRMui logo is an example of a TRM.</div><p>The goal of rTRMui is to identify transcription factor modules (TRMs), that is, complexes of transcription factors (see figure) involved in the regulation of gene expression in a particular cell type or condition. Our approach is centered around a target transcription factor (red circle in figure), for which there is experimental evidence of binding (e.g. by ChIP-seq) and some query transcription factors (blue circles in figure), which have binding sites around the peaks for the target transcription factor. We integrate this information with gene expression in the cell type and with protein-protein interaction data, and use it to predict TRMs.</p>
+
+<p>To have a glance at rTRMui capabilities download the example session dataset and follow the example shown in the Tutorial. Below follows a detailed explanation of the different parameters and options supported in rTRMui.</p>
+
+
+<h3 id="data_input">Data input</h3>
+<p>
+<h4>Target organism</h4>
+
+The species where the ChIP-seq or alternative experimental technique has been performed for the target transcription factor.
+
+<h4>Target transcription factor</h4>
+
+The transcription factor for which a ChIP-seq experiment is available and around which we wish to identify TRMs. Search in the "Transcription factors" tab for the symbol of the transcription factor you want to use.
+
+<h4>Query transcription factors</h4>
+
+The list of transcription factors that we want to test whether they belong to the TRM around the target transcription factor. This list may come from any source of evidence. A typical case is the enrichment of transcription factor binding motifs in the binding regions of the target transcription factor. A file with each identifier followed by a new line must be specified. Supporting identifiers include PWM ids from the rTRM database or from the MotifDb package, as well as Entrezgene identifiers.
+
+<h4>Expressed genes</h4>
+
+List of expressed genes in the tissue of interestes. Ideally the tissue should be the same as the one where the original ChIP-seq experiment for the target TF was performed. The list of expressed genes must be specified using Entrezgene identifiers.
+
+</p>
+
+<h3 id="network_parameters">Network parameters</h3>
+<p>
+<h4>Extended TRM</h4>
+
+This parameter controls whether the TRM is computed applying the maximum distance constraint to the distance between query and target transcription factors or if query transcription factors that satisfy the constraint when compared to other query transcription factors are also kept (FALSE by default).
+
+<h4>Strict TRM</h4>
+
+Sometimes rTRM predictions result in TRMs containing disconnected components (i.e. two or more independent subnetworks). It is possible to enforce that only one subnetwork containing the target TF is returned. This can be controlled with the 'strict' parameter, which when is TRUE (default) enforces a single component.
+
+<h4>Bridge distance</h4>
+
+rTRM searchs for query TFs separated a maximum distance from the target TF. The maximum distance is controlled with the bridge distance parameter. By default bridge distance is 1, which means one protein is allowed to separate the query TF from the target TF. If the minimun distance between the query and TF is larger than the bridge distance then the query TF is discarded. When extended is TRUE, then the query TF is keep if the distance to the target TF or to any other query TF is less or equal to the bridge distance.
+
+<h4>Filter Ubiquitin/Sumo from PPI</h4>
+
+Ubiquitin and Sumo peptides are included in the PPI networks, and represent network outliers that can bias the prediction of TRMs. This parameter gives the user the choice to remove Ubiquitin and Sumo proteins from the PPI network prior to TRM prediction (TRUE by default).
+
+</p>
+<h3 id="plot_parameters">Plot parameters</h3>
+
+<p>
+
+Various graphic parameters may be adjusted to manipulate the appearance of the resulting TRM, which can then be saved as a publication-quality figure.
+
+<h4>Margin</h4>
+
+Controls the margin around the TRM to avoid nodes getting cropped whenever the node size is too large.
+
+<h4>Network layout</h4>
+
+Selects the network layout for the TRM. Five layouts are available:
+
+<ul>
+	<il><strong>concentric:</strong> (default) a concentric layout with target TFs in the center, query TFs in the outer circle and bridge proteins in the middle circle.</il><br>
+	<il><strong>arc:</strong> layout mimicking the rTRM logo, i.e. a linear layout with the target TFs in the middle and the query TFs at each side, with the bridge proteins in between of both in the right side.</il><br>
+	<il><strong>circle:</strong> circle layout from the igraph package.</il><br>
+	<il><strong>kamada.kawai:</strong> from the igraph package.</il><br>
+	<il><strong>fruchterman.reingold:</strong> from the igraph package.</il><br>
+</ul>
+
+<h4>Sort nodes by name</h4>
+
+Controls whether nodes should be ordered by node name in "concentric" layout.
+
+<h4>Node size</h4>
+
+Controls node size.
+
+<h4>Line size</h4>
+
+Controls size of edges and node border.
+
+<h4>Label size</h4>
+
+Controls label size.
+
+</p>
+
+<h3 id="download">Download</h3>
+
+<p>
+	Three buttons with the labels "Plot", "Legend" and "Table" appear when a TRM has been successfully identified. Clicking on any of these buttons will download a PDF version of the TRM, a PDF version of the legend and a tab delimited text file with the information about TRMs found in the "Table" tab.
+</p>
+
+</div>
+</body>
+</html>
