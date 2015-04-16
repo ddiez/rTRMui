@@ -1,0 +1,20 @@
+Package: rTRMui
+=============
+
+Version: 1.4
+
+o Improvements to user interface and general look and feel. Fontawesome icons are used now. Fixed behavior of some web controls (sliders). Updated tutorial. Data tables are paginated (and the number of entries per page customizable).
+
+o Target transcription factor selection process improved. Now all possible transcription factors are added to a searchable dropdown menu.
+
+Version: 1.0
+
+o First Bioconductor release.
+
+o Provides a shiny interface to rTRM.
+
+o All options available in rTRM can be accesses from rTRMui.
+
+o Several utilities to control network appearance (node, edge and label size, etc.)
+
+o Download results in PDF and text format.

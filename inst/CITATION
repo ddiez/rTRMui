@@ -1,0 +1,17 @@
+citHeader("To cite rTRM in publications use:")
+
+citEntry(entry="Article",
+	title = "rTRMui: an R-based local web interface for the prediction of transcriptional regulatory modules",
+	author = c(person("Diego Diez"), person("Diego Miranda-Saavedra")),
+	year = "2013, submitted",
+	journal = "Journal",
+	volume = "",
+	number = "",
+	pages = "",
+	doi = "",
+	url = "",
+
+	textVersion = "Diego Diez, Diego Miranda-Saavedra. rTRMui: an R-based local web interface for the prediction of transcriptional regulatory modules. 2013, submitted"
+)
+
+citFooter("")

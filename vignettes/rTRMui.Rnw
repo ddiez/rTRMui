@@ -1,0 +1,43 @@
+%\VignetteIndexEntry{Introduction to rTRMui}
+%\VignetteKeywords{rTRMui, rTRM}
+%\VignettePackage{rTRMui}
+%\VignetteDepends{rTRMui}
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\title{rTRMui: a shiny user interface for the identification of transcriptional regulatory modules}
+
+\author{Diego Diez}
+
+\maketitle
+
+\section{Introduction}
+
+To install rTRMui you need to have installed rTRM and shiny. To use rTRMui load the library and then just run runTRM() from the R prompt:
+
+<<echo=FALSE>>=
+library(rTRMui)
+@
+
+<<eval=FALSE>>=
+library(rTRMui)
+runTRM()
+@
+
+This will open a web browser and show the rTRMui home page (Figure \ref{fig:fig1}). Instructions on how to use rTRMui are available in the \emph{Help} tab from the rTRMui server. Example datasets can be downloaded from the home page and used with the \emph{Tutorial}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1]{figure1.pdf}
+\caption{rTRMui home page showing the TRM indentified using the sample datasets from the tutorial.}
+\label{fig:fig1}
+\end{figure}
+
+\section{System information}
+
+<<>>=
+sessionInfo()
+@
+
+\end{document}
