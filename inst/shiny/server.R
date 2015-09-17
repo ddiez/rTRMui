@@ -287,7 +287,7 @@ shinyServer(function(input, output, session) {
   output$genes = renderDataTable({
     if(!is.null(trm()))
       writeTRMreport(trm(), organism = input$organism, target = target(), query = query())
-  },options=list(bFilter=FALSE))
+  },options=list(searching=FALSE))
   
   output$tfs = renderDataTable({
   	tfs = switch(input$organism,
@@ -298,7 +298,7 @@ shinyServer(function(input, output, session) {
   		tfs
   	else
   		tfs[grepl(input$filter, tfs$symbol,ignore.case=TRUE), ]
-  },options=list(bFilter=FALSE))
+  },options=list(searching=FALSE))
   
   output$trmtable = downloadHandler(filename = "trmtable.txt", content = function(con) { writeTRMreport(trm(), file = con, organism = input$organism, target = target(), query = query()) })
   
