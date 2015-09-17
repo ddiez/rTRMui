@@ -12,3 +12,5 @@ License: GPL-3
 LazyLoad: yes
 ByteCompile: yes
 biocViews: Transcription, Network, GeneRegulation, GraphAndNetwork, GUI
+URL: https://github.com/ddiez/rTRMui
+BugReports: https://github.com/ddiez/rTRMui/issues
