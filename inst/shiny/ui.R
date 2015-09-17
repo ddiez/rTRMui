@@ -7,7 +7,7 @@ shinyUI(
 	titlePanel(
 		div("rTRMui: Identification of Transcriptional Regulatory Modules", style="height:80px;background-image:url(pic/logo.png);background-size:175px;background-repeat:no-repeat; padding-left:175px"),"rTRMui"),
 	sidebarLayout(
-	sidebarPanel(style="width:250px;",
+	sidebarPanel(
 							 # Example session.
 							 withTags(table(style="width: 100%",td(h4("Example session")),td(style="text-align: right;color: grey;", icon("info-circle","fa-lg"),title="Download the following datasets, set 'mouse' as the target organism, set Sox2 as the target transcription factor, load the corresponding enriched motifs and expressed genes, and you are done!"))),
 							 em("Sox2 dataset on ESCs:"),
@@ -52,7 +52,7 @@ shinyUI(
 							 	))
 							 )
 	),
-	mainPanel(style="left:300px;width:600px;",
+	mainPanel(
 		tabsetPanel(id = "tabs",
 								tabPanel("Plot",
 												 plotOutput("trm"),
